@@ -13,41 +13,51 @@
                     <p class="text-sm text-gray-600 dark:text-dark-400">"Embrace the tech adventure – where mentors sprinkle magic on eager minds, creating a symphony of innovation and curiosity! 🌈✨"</p>
                     <p class="text-sm text-gray-600 dark:text-dark-400">"Mentorship is a shared journey, where the wisdom of the experienced mingles with the curiosity of the eager."</p>
                 </div>
+
+
                 <div class="card-deck">
-                @foreach ($users as $user)
-                <!-- Skip the logged-in user -->
-                    @if ($user->id !== auth()->user()->id)
-                    <div class="card clickable" data-toggle="modal" data-target="#userModal{{ $user->id }}">
-                        <!-- User Profile Picture -->
-                        <div class="p-6 flex items-center justify-center">
-                            @if($user->profile_picture_url)
-                            <img class="w-20 h-20 object-cover rounded-full" src="{{ $user->profile_picture_url }}" alt="Profile Picture">
-                            @else
-                                <img class="w-20 h-20 object-cover rounded-full" src="{{ asset('placeholder_image.jpg') }}" alt="Placeholder Image">
-                            @endif
-                        </div>
-
-                        <div class="p-6 text-black dark:text-dark">
-                            <!-- User Name -->
-                            <h5 class="text-xl font-semibold">{{ $user->name }}</h5>
-
-                            <!-- User Role: Mentor or Mentee -->
-                            <p class="mb-2 text-sm">
-                                @if ($user->role === 'mentor')
-                                    Mentor
-                                @elseif ($user->role === 'mentee')
-                                    Mentee
-                                @else
-                                    Unknown Role
+                        @php $count = 0; @endphp
+                        @foreach ($users as $user)
+                            <!-- Skip the logged-in user -->
+                            @if ($user->id !== auth()->user()->id)
+                                <!-- Start a new row for every 4 users -->
+                                @if ($count % 6 === 0)
+                                    <div class="row mb-4">
                                 @endif
-                            </p>
-                         
-                            <!-- Button to open modal -->
-                            <button type="button" class="btn btn-primary bg-primary" data-toggle="modal" data-target="#userModal{{ $user->id }}">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
+
+              <div class="row mb-4 col-lg-4">
+                  <div class="card clickable" data-toggle="modal" data-target="#userModal{{ $user->id }}">
+                      <!-- User Profile Picture -->
+                      <div class="p-12 flex items-center justify-center">
+                          @if($user->profile_picture_url)
+                              <img class="w-20 h-20 object-cover rounded-full" src="{{ $user->profile_picture_url }}" alt="Profile Picture">
+                          @else
+                              <img class="w-20 h-20 object-cover rounded-full" src="{{ asset('placeholder_image.jpg') }}" alt="Placeholder Image">
+                          @endif
+                      </div>
+
+                      <div class="p-6 text-black dark:text-dark">
+                          <!-- User Name -->
+                          <h5 class="text-xl font-semibold mb-1">{{ $user->name }}</h5>
+
+                          <!-- User Role: Mentor or Mentee -->
+                          <p class="mb-2 text-sm">
+                              @if ($user->role === 'mentor')
+                                  Mentor
+                              @elseif ($user->role === 'mentee')
+                                  Mentee
+                              @else
+                                  Unknown Role
+                              @endif
+                          </p>
+
+                          <!-- Button to open modal -->
+                          <button type="button" class="btn btn-primary bg-primary" data-toggle="modal" data-target="#userModal{{ $user->id }}">
+                              View Details
+                          </button>
+                      </div>
+                  </div>
+              </div>
 
                     <!-- Modal -->
                     <div class="modal fade" id="userModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="userModalLabel{{ $user->id }}" aria-hidden="true">
@@ -62,14 +72,14 @@
                                 <div class="modal-body">
                                     <!-- Display additional details here -->
                                      <!-- User Skills -->
-                            <p class="mb-4"> Skills: 
+                            <p class="mb-4"> Skills:
                                 @foreach ($user->skills as $skill)
                                     <span class="badge badge-primary mr-2"> {{ $skill->name }}</span>
                                 @endforeach
                             </p>
                                     <p>Bio: {{ $user->bio }}</p>
 
-                                    
+
                                     <!-- Button for sending a message -->
                                     <button type="button" class="btn btn-success bg-success" data-toggle="modal" data-target="#sendMessageModal{{ $user->id }}">Send Message</button>
 
@@ -105,7 +115,7 @@
                                 </div>
 
                      <!-- Example button for initiating a mentorship request -->
-                     <button class="btn btn-info" data-toggle="modal" data-target="#initiateMentorshipModal{{ $user->id }}" 
+                     <button class="btn btn-info" data-toggle="modal" data-target="#initiateMentorshipModal{{ $user->id }}"
         @if (($user->role === 'mentor' && auth()->user()->role === 'mentee') || ($user->role === 'mentee' && auth()->user()->role === 'mentor'))
             {{-- Show the button only if the roles match the expected mentor-mentee or mentee-mentor --}}
         @else
@@ -149,6 +159,13 @@
                             </div>
                         </div>
                     </div>
+                    <!-- End the row for every 4 users -->
+            @if (($count + 1) % 6 === 0)
+                </div>
+            @endif
+
+            <!-- Increment the user count -->
+            @php $count++; @endphp
                     @endif
                 @endforeach
             </div>

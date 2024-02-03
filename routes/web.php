@@ -25,13 +25,13 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
- 
+
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
 // Group all routes that require authentication
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
@@ -40,7 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/messages/{message}/reply', [MessageController::class, 'reply'])->name('messages.reply');
     Route::delete('/messages/{message}', [MessageController::class, 'delete'])->name('messages.delete');
 
-  
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -48,7 +48,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mentorship_requests', [MentorshipRequestController::class, 'index'])->name('mentorship_request.index');
     Route::post('/mentorship_requests', [MentorshipRequestController::class, 'store'])->name('mentorship_requests.store');
     Route::post('/update-request-status/{id}', [MentorshipRequestController::class, 'updateStatus']);
-   
+
     Route::patch('/mentorship-requests/{id}/update-status', [MentorshipRequestController::class, 'updateStatus'])
     ->name('mentorship_requests.updateStatus');
     Route::post('/mentorship_requests/updateStatus/{id}', [MentorshipRequestController::class, 'updateStatus']);

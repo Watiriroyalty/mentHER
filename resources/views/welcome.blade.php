@@ -9,7 +9,7 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons 
+  <!-- Favicons
   <link href="{{ asset('img/favicon.png') }}" rel="icon">
 <link href="{{ asset('img/apple-touch-icon.png') }}" rel="apple-touch-icon"> -->
 
@@ -34,7 +34,7 @@
 
   <!-- ======= Header ======= -->
   <section id="topbar" class="topbar d-flex align-items-center">
-        
+
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
         <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">demo@menther.com</a></i>
@@ -57,7 +57,7 @@
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>MentHER<span>.</span></h1>
       </a>
-     
+
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
 
@@ -72,12 +72,10 @@
         <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
             <h2>Welcome to <span>MentHER</span></h2>
             <div style="text-align: justify;">
-             <p>A cutting-edge digital mentoring platform tailored exclusively for women in tech. 
+             <p>A cutting-edge digital mentoring platform tailored exclusively for women in tech.
                 At mentHER, we are committed to championing diversity, fostering inclusion, and nurturing excellence.</p>
-             <p>Join our vibrant community, where the spirit of mentorship thrives, and success is passionately pursued. 
-                 Connect with experienced industry leaders who believe in the power of mentorship & are dedicated to guiding you on your professional path. 
-              </p>    
-            <p>Elevate your tech career with mentHER, where mentorship is more than a connection – it's a catalyst for success.</p>
+             <p>Join our vibrant community and connect with experienced industry leaders who believe in the power of mentorship & are dedicated to guiding you on your professional path.
+              Elevate your tech career with mentHER, where mentorship is more than a connection – it's a catalyst for success.</p>
             </div>
 
             <div class="d-flex justify-content-center justify-content-lg-start">
