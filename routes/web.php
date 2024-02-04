@@ -31,7 +31,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 
 // Group all routes that require authentication
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\UserController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
